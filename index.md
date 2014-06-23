@@ -71,7 +71,7 @@ modFit_erupt <- train(eruptions ~ waiting, data = training, method = "lm",
 
 > People then would expect how wonderful the Old Faithful they will experience at next eruption and plan for future waiting times.
 
-> You can now test on [shiny_faithful](http://rmarkdown.rstudio.com/authoring_shiny.html).
+> You can now test on [shiny_faithful](https://ywang.shinyapps.io/shiny_faithful).
 
 #### Reference
 
