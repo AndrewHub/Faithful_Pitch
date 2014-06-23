@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Old Faithful Geyser</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Welcome to Old Faithful Geyser">
+  <meta name="author" content="Yuantao Wang">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Welcome to Old Faithful Geyser</h1>
+    <h2>An App to predict on waiting and duration time of eruptions</h2>
+    <p>Yuantao Wang<br/>Data Anaylst</p>
+  </hgroup>
+    <a href="https://github.com/AndrewHub/Faithful_Pitch/zipball/gh-pages" class="example">
+     Download
+    </a>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <blockquote>
+<p>This is a simple shiny app created for tourists coming to see the wonderful eruption of Old Faithful Geyser in Yellowstone National Park. Time data needed to input into the app is easily to get from information desk of Old Faithful.</p>
+</blockquote>
+
+<h2>Building Model</h2>
+
+<blockquote>
+<p>I create a very simple linear regression model to predict the eruption and waiting time alternatively.</p>
+</blockquote>
+
+<pre><code class="r">library(caret); data(faithful)
+inTrain &lt;- createDataPartition(y = faithful$waiting, p = 0.75, list = F)
+training &lt;- faithful[inTrain, ]; testing &lt;- faithful[-inTrain, ]
+modFit_erupt &lt;- train(eruptions ~ waiting, data = training, method = &quot;lm&quot;, 
+                     trControl = trainControl(method = &quot;cv&quot;))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Model Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <blockquote>
+<p>Summary information about the model</p>
+</blockquote>
+
+<pre><code>## Linear Regression 
+## 
+## 206 samples
+##   1 predictors
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## 
+## Summary of sample sizes: 185, 185, 186, 186, 185, 186, ... 
+## 
+## Resampling results
+## 
+##   RMSE  Rsquared  RMSE SD  Rsquared SD
+##   0.5   0.8       0.06     0.05       
+## 
+## 
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Visulization of the Model</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-3.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>About the shiny app</h2>
+  </hgroup>
+  <article data-timings="">
+    <blockquote>
+<p>By entering Last Eruption Duration in minutes, the app would calculate the possible waiting time. By entering Last Group Waiting Time in minutes, the app would calculate the next possible eruption time. The interactive plot visually represent the model.</p>
+
+<p>People then would expect how wonderful the Old Faithful they will experience at next eruption and plan for future waiting times.</p>
+
+<p>You can now test on <a href="http://rmarkdown.rstudio.com/authoring_shiny.html">shiny_faithful</a>.</p>
+</blockquote>
+
+<h4>Reference</h4>
+
+<ol>
+<li><p>Härdle, W. (1991) Smoothing Techniques with Implementation in S. New York: Springer. </p></li>
+<li><p>Azzalini, A. and Bowman, A. W. (1990). A look at some data on the Old Faithful geyser. Applied Statistics 39, 357–365. </p></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Model Summary'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Visulization of the Model'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='About the shiny app'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
